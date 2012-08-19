@@ -1,0 +1,5 @@
+;;; (auto-install-from-emacswiki "yasnippet-config.el")
+(when (require 'yasnippet nil t)
+  (setq yas/root-directory "~/.emacs.d/etc/snippets/")
+  (yas/load-directory yas/root-directory)
+  (require 'yasnippet-config nil t))

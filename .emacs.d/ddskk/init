@@ -1,0 +1,281 @@
+;;;; init --- skk customization for emacs -*- emacs-lisp -*-
+;;;  Skk Basic : SKK 基本の設定
+(setq skk-auto-insert-paren nil            ; 対応する閉括弧を自動的に挿入する
+      skk-check-okurigana-on-touroku t     ; 送りあり登録時に余計な仮名をチェック
+      skk-egg-like-newline t               ; Enter キーは確定だけで改行しない
+      skk-henkan-okuri-strictly nil        ; 見出し語と送り仮名が一致したときだけ候補として出力
+      skk-henkan-strict-okuri-precedence t ; 見出し語と送り仮名が一致した候補を優先して表示
+      skk-japanese-message-and-error t     ; メッセージを日本語で通知する
+      skk-show-japanese-menu t             ; メニューを日本語で表示する
+      skk-show-annotation t                ; アノテーションを表示する
+      skk-show-inline t                    ; 変換候補をインラインに表示する
+      skk-show-tooltip t)                  ; エコーエリアの代わりに tooltip で候補などを表示
+
+
+;;;  Skk Dictionary : SKK 辞書の設定
+(setq skk-large-jisyo "~/.emacs.d/etc/skk/SKK-JISYO.L")
+(add-to-list 'skk-extra-jisyo-file-list
+             "~/.emacs.d/etc/skk/SKK-JISYO.geo")
+(add-to-list 'skk-extra-jisyo-file-list
+             "~/.emacs.d/etc/skk/SKK-JISYO.station")
+(add-to-list 'skk-extra-jisyo-file-list
+             "~/.emacs.d/etc/skk/SKK-JISYO.fullname")
+(add-to-list 'skk-extra-jisyo-file-list
+             "~/.emacs.d/etc/skk/SKK-JISYO.jinmei")
+(add-to-list 'skk-extra-jisyo-file-list
+             "~/.emacs.d/etc/skk/SKK-JISYO.propernoun")
+
+;;;  Skk Private : SKK 個人辞書のとり扱い
+
+;;;  Skk Input Basic : SKK 入力動作の基本設定
+
+
+;;;  Skk Input Enhanced : SKK 入力動作の拡張設定
+
+;;;  Skk Act : SKK で拡張ローマ字入力 ACT を使う設定
+
+
+;;;  Skk Azik : SKK で拡張ローマ字入力 AZIK を使う設定
+
+
+;;;  Skk Kanagaki : SKK かな入力の設定
+
+
+;;;  Skk Henkan : SKK 変換動作の設定
+
+;;;  Skk Kakutei : SKK 変換候補確定動作の設定
+
+;;;  Skk Okurigana : SKK 送りがなのとり扱い
+
+;;;  Skk Misc : SKK その他いろいろ
+
+;;;  Skk Visual : SKK の見た目をカスタマイズ
+(setq skk-latin-mode-string          "a"
+      skk-hiragana-mode-string       "あ"
+      skk-katakana-mode-string       "ア"
+      skk-jisx0208-latin-mode-string "Ａ")
+
+;;;  Skk Annotation : SKK アノテーション表示/編集の設定
+;; 変換時に注釈 (annotation) を表示する
+
+;;;  Skk Auto : SKK 自動送りがな機能の設定
+
+;;;  Skk Comp : SKK 補完機能の設定
+
+;;;  Skk Server Completion : SKK サーバ補完機能に関する設定
+
+;;;  Skk Cursor : SKK カーソル制御の設定
+(setq skk-use-color-cursor t
+      skk-cursor-hiragana-color       "indian red"
+      skk-cursor-katakana-color       "green"
+      skk-cursor-jisx0201-color       "thistle"
+      skk-cursor-jisx0208-latin-color "gold"
+      skk-cursor-latin-color          "orange")
+
+;;;  Skk Dcomp : SKK 動的補完の設定
+
+;;;  Skk Gadget : SKK 実行変換機能 (gadget) の設定
+(setq skk-date-ad      t
+      skk-number-style 1)
+
+;;;  Skk Hint : SKK ヒント付き変換機能の設定
+
+;;;  Skk Isearch : SKK インクリメンタルサーチの設定
+;;isearch-mode に入った際に自動的に skk-isearch を起動
+(add-hook 'isearch-mode-hook 'skk-isearch-mode-setup)
+(add-hook 'isearch-mode-end-hook 'skk-isearch-mode-cleanup)
+
+;;;  Skk Jisx0201 : SKK JIS X 0201 (おもに半角カナ) 関連の設定
+
+;;;  Skk Jisx0213 : SKK JIS X 0213 関連の設定
+
+;;;  Skk Kakasi : SKK から kakasi を使う設定
+
+;;;  Skk Kcode : SKK 漢字コードを扱う設定
+
+;;;  Skk Look : SKK から look コマンドを利用する設定
+
+;;;  Skk Lookup : SKK から lookup パッケージを利用する設定
+
+;;;  Skk Num : SKK で数字を扱うための設定
+
+;;;  Skk Server : SKK サーバとの通信に関する設定
+
+
+;;;  Skk Study : SKK 学習機能の設定
+(require 'skk-study)
+
+;;;  Skk Tankan : SKK 単漢字変換機能の設定
+
+;;;  Skk Tooltip : SKK ツールティップ表示の設定
+(when skk-show-tooltip
+  (setq skk-tooltip-parameters
+        '((background-color . "ForestGreen")
+          (border-color . "royal blue"))))
+
+;;;  Skk Tut : SKK チュートリアルの設定
+(setq skk-tut-file "~/.emacs.d/etc/skk/SKK.tut")
+
+;;;  Skk Viper : SKK/Viper 関連の設定
+
+
+
+
+
+
+
+;; 変換候補を縦型インラインに表示する
+;;(setq skk-show-inline 'vertical)
+
+(when skk-show-inline
+  ;; 変数 skk-treat-candidate-appearance-function を利用して自前で候補に
+  ;; 色を付ける場合はこの変数を nil に設定する。
+  (setq skk-inline-show-face nil))
+
+
+;;---------------------------------------------------------------
+;; 句読点を動的に決定する
+(add-hook 'skk-mode-hook
+          (lambda ()
+            (save-excursion
+              (goto-char 0)
+              (make-local-variable 'skk-kutouten-type)
+              (if (re-search-forward "。" 10000 t)
+                  (setq skk-kutouten-type 'en)
+                (setq skk-kutouten-type 'jp)))))
+
+;; 動的な補完を使う
+(setq skk-dcomp-activate t)
+
+;; 動的補完の可否を判定するより高度な設定例
+(setq skk-dcomp-activate
+      #'(lambda ()
+          (and
+           ;; -nw では動的補完をしない。
+           window-system
+           ;; 基本的に行末のときのみ補完する。ただし行末でなくても現在の
+           ;; ポイントから行末までの文字が空白のみだったら補完する。
+           (or (eolp)
+               (looking-at "[ \t]+$")))))
+
+;; 動的補完で候補を複数表示する
+(setq skk-dcomp-multiple-activate t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;変換動作の調整
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; 送り仮名が厳密に正しい候補を優先して表示する
+(setq skk-henkan-strict-okuri-precedence t)
+
+;; 辞書登録のとき、余計な送り仮名を送らないようにする
+(setq skk-check-okurigana-on-touroku 'auto)
+
+;; 変換の学習
+(require 'skk-study)
+
+;;単漢字検索のキーを!にする
+(setq skk-tankan-search-key ?!)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; @@ 検索に関連した設定
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; look コマンドを使った検索をする
+(setq skk-use-look t)
+
+(when skk-use-look
+  ;; look が見つけた語を見出し語として検索する
+  (setq skk-look-recursive-search t)
+  ;; ispell を look と一緒に使うのはやめる
+  (setq skk-look-use-ispell nil)
+  ;; look に渡すコマンドラインオプションの設定。補完時と検索時それぞれに
+  ;; ついて設定できる。
+  ;; look で case を見るときは、それ専用の辞書を sort コマンドで作る必要
+  ;; がある (look の引数 -d, -f は sort の引数 -d, -f と一致させておく必
+  ;; 要がある)。
+  ;; (*) 補完時には引数 -d を指定すると dcomp との併用時に問題あることが
+  ;; 報告されているため、-d を指定しないことをお勧めします。
+  (setq skk-look-completion-arguments "%s /usr/share/dict/words")
+  (setq skk-look-conversion-arguments "-df %s /usr/share/dict/words")
+  ;; `skk-abbrev-mode' で skk-look を使った検索をしたときに確定情報を
+  ;; 個人辞書に記録しないようにする
+  (add-hook 'skk-search-excluding-word-pattern-function
+            ;; KAKUTEI-WORD を引数にしてコールされるので、不要でも引数を取る
+            ;; 必要あり
+            #'(lambda (kakutei-word)
+                (and skk-abbrev-mode
+                     (save-match-data
+                       ;; `skk-henkan-key' が "*" で終わるとき、または
+                       ;; `skk-henkan-key' が数字のみのとき
+                       (or (string-match "\\*$" skk-henkan-key)
+                           (string-match "^[0-9]*$" skk-henkan-key)))))))
+
+;; 数値変換機能を使う
+(setq skk-use-numeric-conversion t)
+
+;; カタカナ語を変換候補に加える。
+(setq skk-search-prog-list
+      (skk-nunion skk-search-prog-list
+                  '((skk-search-katakana))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;辞書に関する設定
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; 辞書サーバを使うための設定
+(setq skk-server-host "localhost")
+(setq skk-server-portnum 1178)
+
+;; 複数の Emacsen を起動して個人辞書を共有する
+(setq skk-share-private-jisyo t)
+
+;; 10 分放置すると個人辞書が自動的に保存される設定
+(defvar skk-auto-save-jisyo-interval 600)
+(defun skk-auto-save-jisyo ()
+  (skk-save-jisyo)
+  )
+(run-with-idle-timer skk-auto-save-jisyo-interval
+                     skk-auto-save-jisyo-interval
+                     'skk-auto-save-jisyo)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;その他いろいろ
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; かなモードの入力で (モード変更を行なわずに) 長音(ー)を
+;; ASCII 数字の直後では `-' に、全角数字の直後では `?' にしたい。
+(setq skk-rom-kana-rule-list
+	  (cons '("-" nil skk-hyphen)
+			skk-rom-kana-rule-list))
+(defun skk-hyphen (arg)
+  (let ((c (char-before (point))))
+    (cond ((null c) "ー")
+          ((and (<= ?0 c) (>= ?9 c)) "-")
+          ((and (<= ?０ c) (>= ?９ c)) "?")
+          (t "ー"))))
+
+;; かなモードの入力でモード変更を行わずに、数字入力中の
+;; 小数点 (.) およびカンマ (,) 入力を実現する。
+;; (例) かなモードのまま 1.23 や 1,234,567 などの記述を行える。
+;; period
+(setq skk-rom-kana-rule-list
+	  (cons '("." nil skk-period)
+			skk-rom-kana-rule-list))
+(defun skk-period (arg)
+  (let ((c (char-before (point))))
+    (cond ((null c) "。")
+          ((and (<= ?0 c) (>= ?9 c)) ".")
+          ((and (<= ?０ c) (>= ?９ c)) "．")
+          (t "。"))))
+
+;; comma
+(setq skk-rom-kana-rule-list
+      (cons '("," nil skk-comma)
+            skk-rom-kana-rule-list))
+(defun skk-comma (arg)
+  (let ((c (char-before (point))))
+    (cond ((null c) "、")
+          ((and (<= ?0 c) (>= ?9 c)) ",")
+          ((and (<= ?０ c) (>= ?９ c)) "，")
+          (t "、"))))

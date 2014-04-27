@@ -26,7 +26,7 @@ export NODE_PATH=/usr/local/lib/node_modules
 
 # Java
 #export JAVA_HOME=/Library/Java/Home
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home
+export JAVA_HOME=`/usr/libexec/java_home`
 PATH=$JAVA_HOME/bin:$PATH
 
 # Ant

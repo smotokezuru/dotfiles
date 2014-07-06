@@ -49,8 +49,8 @@ PATH=$GRADLE_HOME/bin:$PATH
 export ROO_OPTS="-Droo.bright=true"
 
 # Ruby
-RUBYLIB=$HOME/Library/Migemo
-export RUBYLIB
+#RUBYLIB=$HOME/Library/Migemo
+#export RUBYLIB
 
 # Subversion
 export SVN_EDITOR=emacsclient
@@ -58,5 +58,5 @@ export EDITOR=emacsclient
 export VISUAL=emacsclient
 export ALTERNATE_EDITOR=vim
 
-PATH=~/bin:~/.gem/ruby/1.8/bin:/usr/local/bin:$PATH
+PATH=~/bin:$PATH
 export PATH

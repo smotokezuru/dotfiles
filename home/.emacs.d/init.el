@@ -5,8 +5,10 @@
 ;(setenv "RUBYLIB" "~/Library/Migemo")
 ;(setq migemo-directory "~/Library/Migemo")
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/elisp"))
-(cd "~/.emacs.d/elisp")
-(load "~/.emacs.d/elisp/subdirs.el")
+(cd "~/ownCloud/elisp")
+
+;(load "~/.emacs.d/elisp/subdirs.el")
+(load "~/ownCloud/elisp/subdirs.el")
 (cd "~")
 ;; tomoya's way
 ;;(defun add-to-load-path (&rest paths)

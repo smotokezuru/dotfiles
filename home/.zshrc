@@ -7,6 +7,8 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
 
+# GitHub
+export HOMEBREW_GITHUB_TOKEN=8825e8afef7cae25a39bcc9520fe7695f3bb381b
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -76,3 +78,4 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # setting rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+export HOMEBREW_GITHUB_API_TOKEN=8825e8afef7cae25a39bcc9520fe7695f3bb381b
